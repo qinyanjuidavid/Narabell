@@ -4,7 +4,7 @@ from django.db import models
 # title
 # cover_image
 # book
-# author
+# author(m@m)
 # audio
 
 
@@ -13,3 +13,24 @@ from django.db import models
 # rating
 # comment
 # reader
+# publisher
+# year published
+# genre
+# price
+# number of pages
+# ISBN
+# Summary
+# book excerpt meaning- a short extract from a book, especially one published separately or in a magazine or newspaper.
+# category(m2m)
+
+
+# class Author
+# author_id
+# name
+# bio
+# image
+# books
+# date of birth
+# date of death
+# country
+#
