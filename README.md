@@ -1,2 +1,2 @@
 # Nara-Bell
-African Tales Re-narrated
+African Tales narrated
