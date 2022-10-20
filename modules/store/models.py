@@ -1,3 +1,15 @@
 from django.db import models
 
-# Create your models here.
+# class Book
+# title
+# cover_image
+# book
+# author
+# audio
+
+
+# class Ratings
+# book
+# rating
+# comment
+# reader
