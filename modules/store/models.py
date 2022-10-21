@@ -1,9 +1,10 @@
 from distutils.command.upload import upload
 import uuid
 from django.db import models
-from modules.accounts.models import User, TrackingModel
+from modules.accounts.models import User, TrackingModel, Reader
 from django.utils.translation import gettext as _
 from django_countries.fields import CountryField
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Author(TrackingModel):
@@ -39,24 +40,67 @@ class Publisher(TrackingModel):
     pass
 
 
+def book_covers_directory_path(instance, filename):
+    return f"covers/{instance.title}/{filename}"
+
+
+def books_directory_path(instance, filename):
+    return f"books/{instance.title}/{filename}"
+
+
+def book_audio_directory_path(instance, filename):
+    return f"audio/{instance.title}/{filename}"
+
+
 class Book(TrackingModel):
-    # title
-    # cover_image
-    # book
-    # author(m2m)
-    # audio
-    # publisher(m2m)
-    # year published
-    # ISBN
-    # summary
-    # genre(m2m) category
-    # book excerpt meaning- a short extract from a book, especially one published separately or in a magazine or newspaper.
-    pass
+    title = models.CharField(_("title"), max_length=256, unique=True)
+    cover = models.ImageField(
+        _("cover image"),
+        upload_to=book_covers_directory_path,
+        default="book.png",
+    )
+    book = models.FileField(_("book"), upload_to=books_directory_path)
+    author = models.ManyToManyField(Author, related_name="authors")
+    audio = models.FileField(
+        _("audio"),
+        upload_to=book_audio_directory_path,
+        blank=True,
+        null=True,
+    )
+    publisher = models.ManyToManyField(Publisher, related_name="publishers")
+    year_published = models.DateField(_("year published"), null=True)
+    ISBN = models.CharField(_("ISBN"), max_length=256, unique=True)
+    summary = models.TextField(_("summary"))
+    genre = models.ManyToManyField(Genre, related_name="genre")  # category
+    book_excerpt = models.TextField(
+        _("book excerpt"), max_length=500
+    )  # a short extract from a book,
+    # especially one published separately or in a magazine or newspaper.
+
+    def __str__(self):
+        return self.title or str(self.ISBN)
+
+    class Meta:
+        verbose_name_plural = "Books"
+        ordering = ["-created_at"]
 
 
 class Ratings(TrackingModel):
-    # book
-    # rating
-    # comment
-    # reader
-    pass
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    reader = models.ForeignKey(Reader, on_delete=models.DO_NOTHING)
+    rating = models.IntegerField(
+        _("rating"),
+        default=0,
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(0),
+        ],
+    )
+    comment = models.TextField(_("comment"), blank=True, null=True)
+
+    def __str__(self):
+        return str(self.book.title)
+
+    class Meta:
+        verbose_name_plural = "Ratings"
+        ordering = ["-created_at"]

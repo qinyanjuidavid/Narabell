@@ -75,7 +75,10 @@ class CustomManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, TrackingModel):
-    ROLE_CHOICES = (("Administrator", "Administrator"),)
+    ROLE_CHOICES = (
+        ("Administrator", "Administrator"),
+        ("Reader", "Reader"),
+    )
 
     full_name = models.CharField(
         _("fullname"),
@@ -97,7 +100,7 @@ class User(AbstractBaseUser, TrackingModel):
     is_active = models.BooleanField(_("active"), default=False)
     is_admin = models.BooleanField(_("admin"), default=False)
     role = models.CharField(
-        _("role"), max_length=27, choices=ROLE_CHOICES, default="Donor"
+        _("role"), max_length=27, choices=ROLE_CHOICES, default="Reader"
     )
     timestamp = models.DateTimeField(_("timestamp"), auto_now_add=True)
     counter = models.IntegerField(
@@ -155,6 +158,17 @@ class Profile(TrackingModel):
 
 
 class Administrator(Profile):
+    pass
+
+    def __str__(self):
+        return self.user.full_name or str(self.user.phone)
+
+    class Meta:
+        verbose_name_plural = "Administrators"
+        ordering = ["-created_at"]
+
+
+class Reader(Profile):
     pass
 
     def __str__(self):
