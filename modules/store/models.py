@@ -1,4 +1,6 @@
 from distutils.command.upload import upload
+from enum import unique
+from tabnanny import verbose
 import uuid
 from django.db import models
 from modules.accounts.models import User, TrackingModel, Reader
@@ -15,7 +17,7 @@ class Author(TrackingModel):
         default=uuid.uuid4,
     )
     name = models.CharField(_("full name"), max_length=256)
-    bio = models.TextField(_("bio"))
+    bio = models.TextField(_("bio"), blank=True, null=True)
     display_image = models.ImageField(
         _("display image"),
         upload_to="authors-image/",
@@ -33,11 +35,33 @@ class Author(TrackingModel):
 
 
 class Genre(TrackingModel):
-    pass
+    genre = models.CharField(
+        _("genre"),
+        max_length=256,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.genre
+
+    class Meta:
+        verbose_name_plural = "Genre"
+        ordering = ["-created_at"]
 
 
 class Publisher(TrackingModel):
-    pass
+    name = models.CharField(
+        _("publisher's name"),
+        max_length=256,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Publishers"
+        ordering = ["-created_at"]
 
 
 def book_covers_directory_path(instance, filename):
@@ -67,13 +91,16 @@ class Book(TrackingModel):
         blank=True,
         null=True,
     )
-    publisher = models.ManyToManyField(Publisher, related_name="publishers")
+    publisher = models.ManyToManyField(
+        Publisher,
+        related_name="publishers",
+    )
     year_published = models.DateField(_("year published"), null=True)
     ISBN = models.CharField(_("ISBN"), max_length=256, unique=True)
-    summary = models.TextField(_("summary"))
-    genre = models.ManyToManyField(Genre, related_name="genre")  # category
+    summary = models.TextField(_("summary"), blank=True, null=True)
+    genre = models.ManyToManyField(Genre, related_name="genres")  # category
     book_excerpt = models.TextField(
-        _("book excerpt"), max_length=500
+        _("book excerpt"), max_length=500, blank=True, null=True
     )  # a short extract from a book,
     # especially one published separately or in a magazine or newspaper.
 
