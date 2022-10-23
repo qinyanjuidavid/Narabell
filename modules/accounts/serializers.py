@@ -117,3 +117,18 @@ class RequestPasswordResetPhoneSerializer(serializers.Serializer):
 
     class Meta:
         fields = ("phone",)
+
+
+# Set new Password
+class SetNewPasswordSerializer(serializers.Serializer):
+    password = serializers.CharField(max_length=20, write_only=True)
+    password_confirm = serializers.CharField(max_length=20, write_only=True)
+    phone = serializers.CharField(max_length=20)
+    token = serializers.CharField(max_length=20, write_only=True)
+
+    class Meta:
+        fields = (
+            "password",
+            "password_confirm",
+            "phone",
+        )
