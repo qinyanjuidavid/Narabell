@@ -3,6 +3,7 @@ from django.contrib.auth.models import Group
 
 from modules.accounts.models import User
 from modules.accounts.models import Administrator
+from v2.modules.accounts.models import Reader
 
 
 admin.site.unregister(Group)
@@ -26,4 +27,9 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Administrator)
 class AdministratorAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Reader)
+class ReaderAdmin(admin.ModelAdmin):
     pass

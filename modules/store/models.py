@@ -139,7 +139,7 @@ class Favourite(TrackingModel):
     )
 
     def __str__(self):
-        return self.reader.full_name or self.reader.email
+        return self.reader.full_name or str(self.reader.phone)
 
     class Meta:
         verbose_name_plural = "Favourite Books"
