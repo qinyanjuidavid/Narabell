@@ -6,7 +6,7 @@ import requests
 
 from django.shortcuts import get_object_or_404
 
-from modules.accounts.models import User
+from modules.accounts.models import Reader, User
 from modules.accounts.serializers import (
     GoogleSocialLoginSerializer,
     LoginSerializer,
@@ -356,10 +356,12 @@ class GoogleSocialLogin(ModelViewSet):
                 is_active=True,
                 role="Reader",
             )
-            pic = data["picture"]
             password = User.objects.make_random_password()
             user.set_password(password)
             user.save()
+            reader_obj = get_object_or_404(Reader, user=user)
+            reader_obj.profile_pic = data["picture"]
+            reader_obj.save()
         token = RefreshToken.for_user(user)
         return Response(
             {
