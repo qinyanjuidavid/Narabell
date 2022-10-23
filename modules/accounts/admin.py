@@ -1,9 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 
-from modules.accounts.models import User
-from modules.accounts.models import Administrator
-from v2.modules.accounts.models import Reader
+from modules.accounts.models import User, Administrator, Reader
 
 
 admin.site.unregister(Group)

@@ -12,7 +12,6 @@ from modules.accounts.views import (
 )
 from rest_framework.routers import SimpleRouter
 
-
 app_name = "api"
 routes = SimpleRouter()
 

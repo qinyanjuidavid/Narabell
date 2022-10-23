@@ -338,6 +338,7 @@ class GoogleSocialLogin(ModelViewSet):
             "https://www.googleapis.com/oauth2/v2/userinfo", params=payload
         )
         data = json.loads(r.text)
+        print(data)
         if "error" in data:
             return Response(
                 {"error": "Invalid or expired token"},
@@ -355,6 +356,7 @@ class GoogleSocialLogin(ModelViewSet):
                 is_active=True,
                 role="Reader",
             )
+            pic = data["picture"]
             password = User.objects.make_random_password()
             user.set_password(password)
             user.save()

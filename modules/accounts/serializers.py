@@ -5,13 +5,12 @@ import pyotp
 from django.contrib.auth.models import update_last_login
 from django.core.exceptions import ObjectDoesNotExist
 from django_countries.serializers import CountryFieldMixin
-from modules.accounts.models import User
+from modules.accounts.models import User, Reader
 from modules.accounts.tokens import TokenGen
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.settings import api_settings
-from v2.modules.accounts.models import Reader
 
 
 class UserSerializer(serializers.ModelSerializer):
