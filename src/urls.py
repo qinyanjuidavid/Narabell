@@ -1,3 +1,4 @@
+from distutils.debug import DEBUG
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -10,9 +11,9 @@ from rest_framework.documentation import include_docs_urls
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="The NaraBell API",
+        title="The Narabell API",
         default_version="v1",
-        description="African Tales",
+        description="African Tales Narrated",
         terms_of_service="https://coderpass.herokuapp.com",
         contact=openapi.Contact(email="deverbout@gmail.com"),
         license=openapi.License(name="MIT License"),
@@ -20,8 +21,8 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
-API_TITLE = "NaraBell"
-API_DESCRIPTION = "African Tales Re-Naratted"
+API_TITLE = "Narabell"
+API_DESCRIPTION = "African Tales Naratted"
 
 
 urlpatterns = [
@@ -45,7 +46,6 @@ urlpatterns = [
         name="schema-redoc",
     ),
 ]
-
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

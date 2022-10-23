@@ -1,6 +1,3 @@
-from distutils.command.upload import upload
-from enum import unique
-from tabnanny import verbose
 import uuid
 from django.db import models
 from modules.accounts.models import User, TrackingModel, Reader
@@ -103,6 +100,7 @@ class Book(TrackingModel):
         _("book excerpt"), max_length=500, blank=True, null=True
     )  # a short extract from a book,
     # especially one published separately or in a magazine or newspaper.
+    available = models.BooleanField(_("avail"), default=False)
 
     def __str__(self):
         return self.title or str(self.ISBN)
@@ -131,3 +129,7 @@ class Ratings(TrackingModel):
     class Meta:
         verbose_name_plural = "Ratings"
         ordering = ["-created_at"]
+
+
+class Favourite(TrackingModel):
+    pass
