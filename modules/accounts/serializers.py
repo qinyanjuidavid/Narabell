@@ -109,3 +109,11 @@ class TokenRequestSerializer(serializers.Serializer):
 
     class Meta:
         fields = ("token", "phone")
+
+
+# Request Password Reset Phone where otp will be sent
+class RequestPasswordResetPhoneSerializer(serializers.Serializer):
+    phone = serializers.CharField(max_length=20)
+
+    class Meta:
+        fields = ("phone",)
