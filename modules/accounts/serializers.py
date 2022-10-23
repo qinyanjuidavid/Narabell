@@ -149,6 +149,8 @@ class ReaderProfileSerializer(serializers.ModelSerializer):
             "updated_at",
         )
 
+        read_only_field = ("id",)
+
     def update(self, instance, validated_data):
         if validated_data.get("user"):
             user_data = validated_data.pop("user")
@@ -165,3 +167,10 @@ class ReaderProfileSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class GoogleSocialLoginSerializer(serializers.Serializer):
+    token = serializers.CharField(max_length=255, required=True)
+
+    class Meta:
+        fields = ("token",)
