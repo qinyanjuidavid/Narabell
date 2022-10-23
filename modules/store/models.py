@@ -132,4 +132,15 @@ class Ratings(TrackingModel):
 
 
 class Favourite(TrackingModel):
-    pass
+    reader = models.ForeignKey(Reader, on_delete=models.CASCADE)
+    books = models.ManyToManyField(
+        Book,
+        related_name="favourite_books",
+    )
+
+    def __str__(self):
+        return self.reader.full_name or self.reader.email
+
+    class Meta:
+        verbose_name_plural = "Favourite Books"
+        ordering = ["-id", "-created_at"]

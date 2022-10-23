@@ -75,3 +75,8 @@ class RatingSerializer(serializer.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+
+class FavouriteSerializer(serializer.ModelSerializer):
+    class Meta:
+        pass
