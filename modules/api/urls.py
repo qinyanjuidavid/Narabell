@@ -10,7 +10,12 @@ from modules.accounts.views import (
     RequestPasswordResetPhoneNumber,
     SetNewPasswordViewSet,
 )
-from modules.store.views import AuthorViewSet, GenreViewSet
+from modules.store.views import (
+    AuthorViewSet,
+    BookViewSet,
+    GenreViewSet,
+    PublisherViewSet,
+)
 from rest_framework.routers import SimpleRouter
 
 app_name = "api"
@@ -40,6 +45,8 @@ routes.register("google/login", GoogleSocialLogin, basename="googleLogin")
 # store
 routes.register("authors", AuthorViewSet, basename="authors")
 routes.register("genres", GenreViewSet, basename="genres")
+routes.register("publishers", PublisherViewSet, basename="publishers")
+routes.register("books", BookViewSet, basename="books")
 urlpatterns = [
     *routes.urls,
 ]
