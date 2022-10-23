@@ -10,6 +10,7 @@ from modules.accounts.views import (
     RequestPasswordResetPhoneNumber,
     SetNewPasswordViewSet,
 )
+from modules.store.views import AuthorViewSet
 from rest_framework.routers import SimpleRouter
 
 app_name = "api"
@@ -36,6 +37,8 @@ routes.register(
 )
 routes.register("google/login", GoogleSocialLogin, basename="googleLogin")
 
+# store
+routes.register("authors", AuthorViewSet, basename="authors")
 urlpatterns = [
     *routes.urls,
 ]

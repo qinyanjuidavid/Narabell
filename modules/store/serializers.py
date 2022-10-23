@@ -1,10 +1,9 @@
 from modules.accounts.serializers import ReaderProfileSerializer
-from rest_framework import serializer
-from modules.store.models import Author, Book, Genre, Publisher
-from v2.modules.store.models import Favourite, Ratings
+from modules.store.models import Author, Book, Favourite, Genre, Publisher, Ratings
+from rest_framework import serializers
 
 
-class AuthorSerializer(serializer.ModelSerializer):
+class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = (
@@ -13,14 +12,14 @@ class AuthorSerializer(serializer.ModelSerializer):
             "bio",
             "display_image",
             "date_of_birth",
-            "date_or_death",
+            "date_of_death",
             "country",
             "created_at",
             "updated_at",
         )
 
 
-class GenreSerializer(serializer.ModelSerializer):
+class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = (
@@ -31,7 +30,7 @@ class GenreSerializer(serializer.ModelSerializer):
         )
 
 
-class PublisherSerializer(serializer.ModelSerializer):
+class PublisherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publisher
         fields = (
@@ -42,7 +41,7 @@ class PublisherSerializer(serializer.ModelSerializer):
         )
 
 
-class BookSerializer(serializer.ModelSerializer):
+class BookSerializer(serializers.ModelSerializer):
     publisher = PublisherSerializer(read_only=True, many=True)
     genre = GenreSerializer(read_only=True, many=True)
     author = AuthorSerializer(read_only=True, many=True)
@@ -68,7 +67,7 @@ class BookSerializer(serializer.ModelSerializer):
         )
 
 
-class RatingSerializer(serializer.ModelSerializer):
+class RatingSerializer(serializers.ModelSerializer):
     reader = ReaderProfileSerializer(read_only=True)
     book = BookSerializer(read_only=True)
 
@@ -85,7 +84,7 @@ class RatingSerializer(serializer.ModelSerializer):
         )
 
 
-class FavouriteSerializer(serializer.ModelSerializer):
+class FavouriteSerializer(serializers.ModelSerializer):
     reader = ReaderProfileSerializer(read_only=True)
     book = BookSerializer(read_only=True, many=True)
 
