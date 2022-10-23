@@ -1,6 +1,6 @@
 from rest_framework import serializer
 from modules.store.models import Author, Genre, Publisher
-from v2.modules.store.models import Ratings
+from v2.modules.store.models import Favourite, Ratings
 
 
 class AuthorSerializer(serializer.ModelSerializer):
@@ -79,4 +79,11 @@ class RatingSerializer(serializer.ModelSerializer):
 
 class FavouriteSerializer(serializer.ModelSerializer):
     class Meta:
-        pass
+        model = Favourite
+        fields = (
+            "id",
+            "reader",
+            "books",
+            "created_at",
+            "updated_at",
+        )
