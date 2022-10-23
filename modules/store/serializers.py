@@ -1,5 +1,6 @@
+from modules.accounts.serializers import ReaderProfileSerializer
 from rest_framework import serializer
-from modules.store.models import Author, Genre, Publisher
+from modules.store.models import Author, Book, Genre, Publisher
 from v2.modules.store.models import Favourite, Ratings
 
 
@@ -42,6 +43,10 @@ class PublisherSerializer(serializer.ModelSerializer):
 
 
 class BookSerializer(serializer.ModelSerializer):
+    publisher = PublisherSerializer(read_only=True, many=True)
+    genre = GenreSerializer(read_only=True, many=True)
+    author = AuthorSerializer(read_only=True, many=True)
+
     class Meta:
         model = Book
         fields = (
@@ -64,6 +69,9 @@ class BookSerializer(serializer.ModelSerializer):
 
 
 class RatingSerializer(serializer.ModelSerializer):
+    reader = ReaderProfileSerializer(read_only=True)
+    book = BookSerializer(read_only=True)
+
     class Meta:
         model = Ratings
         fields = (
@@ -78,6 +86,9 @@ class RatingSerializer(serializer.ModelSerializer):
 
 
 class FavouriteSerializer(serializer.ModelSerializer):
+    reader = ReaderProfileSerializer(read_only=True)
+    book = BookSerializer(read_only=True, many=True)
+
     class Meta:
         model = Favourite
         fields = (
