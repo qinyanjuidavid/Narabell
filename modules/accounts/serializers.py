@@ -11,6 +11,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.settings import api_settings
+from v2.modules.accounts.models import Reader
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -132,3 +133,35 @@ class SetNewPasswordSerializer(serializers.Serializer):
             "password_confirm",
             "phone",
         )
+
+
+class ReaderProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Reader
+        fields = (
+            "id",
+            "user",
+            "bio",
+            "profile_picture",
+            "created_at",
+            "updated_at",
+        )
+
+    def update(self, instance, validated_data):
+        if validated_data.get("user"):
+            user_data = validated_data.pop("user")
+            user = instance.user
+            user.phone = user_data.get("phone", user.phone)
+            user.email = user_data.get("email", user.email)
+            user.full_name = user_data.get("full_name", user.full_name)
+            user.save()
+        # Update profile
+        instance.bio = validated_data.get("bio", instance.bio)
+        instance.profile_picture = validated_data.get(
+            "profile_picture", instance.profile_picture
+        )
+        instance.save()
+
+        return instance
