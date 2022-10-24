@@ -15,6 +15,7 @@ from modules.store.views import (
     BookViewSet,
     GenreViewSet,
     PublisherViewSet,
+    RatingViewSet,
 )
 from rest_framework.routers import SimpleRouter
 
@@ -47,6 +48,7 @@ routes.register("authors", AuthorViewSet, basename="authors")
 routes.register("genres", GenreViewSet, basename="genres")
 routes.register("publishers", PublisherViewSet, basename="publishers")
 routes.register("books", BookViewSet, basename="books")
+routes.register("ratings", RatingViewSet, basename="ratings")
 urlpatterns = [
     *routes.urls,
 ]

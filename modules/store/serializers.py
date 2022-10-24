@@ -1,3 +1,4 @@
+from modules.accounts.models import Reader
 from modules.accounts.serializers import ReaderProfileSerializer
 from modules.store.models import Author, Book, Favourite, Genre, Publisher, Ratings
 from rest_framework import serializers
@@ -69,7 +70,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 class RatingSerializer(serializers.ModelSerializer):
     reader = ReaderProfileSerializer(read_only=True)
-    book = BookSerializer(read_only=True)
+    # book = BookSerializer(read_only=True)
 
     class Meta:
         model = Ratings
@@ -82,6 +83,25 @@ class RatingSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+    def create(self, validated_data):
+        reader_query = Reader.objects.get(
+            user=self.context["request"].user,
+        )
+        ratings, _ = Ratings.objects.get_or_create(
+            book=validated_data["book"],
+            reader=reader_query,
+        )
+        ratings.rating = validated_data.get("rating", rating.rating)
+        ratings.comment = validated_data.get("comment", rating.comment)
+        ratings.save()
+        return ratings
+
+    def update(self, instance, validated_data):
+        instance.rating = validated_data.get("rating", instance.rating)
+        instance.comment = validated_data.get("comment", instance.comment)
+        instance.save()
+        return instance
 
 
 class FavouriteSerializer(serializers.ModelSerializer):
