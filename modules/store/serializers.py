@@ -106,7 +106,7 @@ class RatingSerializer(serializers.ModelSerializer):
 
 class FavouriteSerializer(serializers.ModelSerializer):
     reader = ReaderProfileSerializer(read_only=True)
-    book = BookSerializer(read_only=True, many=True)
+    books = BookSerializer(read_only=True, many=True)
 
     class Meta:
         model = Favourite

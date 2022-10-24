@@ -13,6 +13,7 @@ from modules.accounts.views import (
 from modules.store.views import (
     AuthorViewSet,
     BookViewSet,
+    BookMarkViewSet,
     GenreViewSet,
     PublisherViewSet,
     RatingViewSet,
@@ -49,6 +50,7 @@ routes.register("genres", GenreViewSet, basename="genres")
 routes.register("publishers", PublisherViewSet, basename="publishers")
 routes.register("books", BookViewSet, basename="books")
 routes.register("ratings", RatingViewSet, basename="ratings")
+routes.register("bookmark", BookMarkViewSet, basename="bookMark")
 urlpatterns = [
     *routes.urls,
 ]
