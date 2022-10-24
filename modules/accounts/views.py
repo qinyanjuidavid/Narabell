@@ -1,5 +1,6 @@
 import base64
 import json
+from modules.accounts.permissions import IsReader
 from modules.accounts.tokens import TokenGen
 import pyotp
 import requests
@@ -10,6 +11,7 @@ from modules.accounts.models import Reader, User
 from modules.accounts.serializers import (
     GoogleSocialLoginSerializer,
     LoginSerializer,
+    ReaderProfileSerializer,
     RegisterSerializer,
     RequestPasswordResetPhoneSerializer,
     SetNewPasswordSerializer,
@@ -370,3 +372,34 @@ class GoogleSocialLogin(ModelViewSet):
             },
             status=status.HTTP_200_OK,
         )
+
+
+class ReaderProfileViewSet(ModelViewSet):
+    """
+    Readers can view and update their profile.
+    """
+
+    serializer_class = ReaderProfileSerializer
+    permission_classes = [IsAuthenticated, IsReader]
+    http_method_names = ["get", "put", "patch"]
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Reader.objects.filter(user=user)
+        return queryset
+
+    def retrieve(self, request, pk=None, *args, **kwargs):
+        queryset = self.get_queryset()
+        queryset = get_object_or_404(queryset, pk=pk)
+        serializer = self.get_serializer(queryset)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def update(self, request, pk=None, *args, **kwargs):
+        queryset = self.get_queryset()
+        queryset = get_object_or_404(queryset, pk=pk)
+        serializer = self.get_serializer(queryset, data=request.data, partial=True)
+        serializer.is_valid(
+            raise_exception=True,
+        )
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)

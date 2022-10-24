@@ -1,10 +1,10 @@
 from django.urls import path
-from django.views.generic import TemplateView
 from modules.accounts.views import (
     AccountActivationViewSet,
     GoogleSocialLogin,
     LoginViewSet,
     PasswordResetTokenCheckViewSet,
+    ReaderProfileViewSet,
     RefreshViewSet,
     RegisterViewSet,
     RequestPasswordResetPhoneNumber,
@@ -43,7 +43,7 @@ routes.register(
     "password-reset-complete", SetNewPasswordViewSet, basename="password-reset-complete"
 )
 routes.register("google/login", GoogleSocialLogin, basename="googleLogin")
-
+routes.register("reader-profile", ReaderProfileViewSet, basename="readerProfile")
 # store
 routes.register("authors", AuthorViewSet, basename="authors")
 routes.register("genres", GenreViewSet, basename="genres")
