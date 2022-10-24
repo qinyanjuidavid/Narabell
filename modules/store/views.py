@@ -133,7 +133,7 @@ class BookViewSet(ModelViewSet):
     http_method_names = ["get"]
 
     def get_queryset(self):
-        queryset = self.queryset
+        queryset = self.queryset.filter(available=True)
         query = self.request.query_params.get("q")
         if query:
             queryset = queryset.filter(

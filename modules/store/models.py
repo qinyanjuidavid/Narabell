@@ -17,10 +17,11 @@ class Author(TrackingModel):
     bio = models.TextField(_("bio"), blank=True, null=True)
     display_image = models.ImageField(
         _("display image"),
+        default="display-img.png",
         upload_to="authors-image/",
     )
-    date_of_birth = models.DateField(_("date of birth"), null=True)
-    date_of_death = models.DateField(_("date of death"), null=True)
+    date_of_birth = models.DateField(_("date of birth"), blank=True, null=True)
+    date_of_death = models.DateField(_("date of death"), blank=True, null=True)
     country = CountryField(_("country"), blank=True, null=True)
 
     def __str__(self):
@@ -92,7 +93,7 @@ class Book(TrackingModel):
         Publisher,
         related_name="publishers",
     )
-    year_published = models.DateField(_("year published"), null=True)
+    year_published = models.DateField(_("year published"), blank=True, null=True)
     ISBN = models.CharField(_("ISBN"), max_length=256, unique=True)
     summary = models.TextField(_("summary"), blank=True, null=True)
     genre = models.ManyToManyField(Genre, related_name="genres")  # category

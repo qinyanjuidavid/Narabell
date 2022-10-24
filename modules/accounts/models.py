@@ -175,5 +175,5 @@ class Reader(Profile):
         return self.user.full_name or str(self.user.phone)
 
     class Meta:
-        verbose_name_plural = "Administrators"
+        verbose_name_plural = "Readers"
         ordering = ["-created_at"]
