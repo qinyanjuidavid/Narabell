@@ -9,6 +9,7 @@ from modules.accounts.views import (
     RegisterViewSet,
     RequestPasswordResetPhoneNumber,
     SetNewPasswordViewSet,
+    LogoutViewSet,
 )
 from modules.store.views import (
     AuthorViewSet,
@@ -27,6 +28,7 @@ routes = SimpleRouter()
 # accounts
 routes.register("login", LoginViewSet, basename="login")
 routes.register("register", RegisterViewSet, basename="register")
+routes.register("logout", LogoutViewSet, basename="logout")
 routes.register("auth/refresh", RefreshViewSet, basename="authRefresh")
 routes.register("activate", AccountActivationViewSet, basename="activate")
 routes.register(

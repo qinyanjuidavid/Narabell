@@ -16,6 +16,7 @@ from modules.accounts.serializers import (
     RequestPasswordResetPhoneSerializer,
     SetNewPasswordSerializer,
     TokenRequestSerializer,
+    LogoutSerializer,
 )
 
 from rest_framework import generics, serializers, status
@@ -46,6 +47,28 @@ class LoginViewSet(ModelViewSet, TokenObtainPairView):
         except TokenError as e:
             raise InvalidToken(e.args[0])
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
+
+
+class LogoutViewSet(ModelViewSet):
+    serializer_class = LogoutSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["post"]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(
+                {"message": "Successfully logged out"},
+                status=status.HTTP_205_RESET_CONTENT,
+            )
+        except Exception as error:
+            return Response(
+                {"message": "Logout failed"}, status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class RegisterViewSet(ModelViewSet, TokenObtainPairView):
@@ -333,14 +356,14 @@ class GoogleSocialLogin(ModelViewSet):
     http_method_names = ["post"]
 
     def create(self, request, *args, **kwargs):
-        payload = {
-            "access_token": request.data.get("token"),
-        }
+        serializer = self.get_serializer(data=request.data)
+
+        serializer.is_valid(raise_exception=True)
+        payload = {"access_token": serializer.validated_data["token"]}
         r = requests.get(
             "https://www.googleapis.com/oauth2/v2/userinfo", params=payload
         )
         data = json.loads(r.text)
-        print(data)
         if "error" in data:
             return Response(
                 {"error": "Invalid or expired token"},
@@ -356,14 +379,10 @@ class GoogleSocialLogin(ModelViewSet):
                 full_name="",
                 phone=data["id"],
                 is_active=True,
-                role="Reader",
             )
             password = User.objects.make_random_password()
             user.set_password(password)
             user.save()
-            reader_obj = get_object_or_404(Reader, user=user)
-            reader_obj.profile_pic = data["picture"]
-            reader_obj.save()
         token = RefreshToken.for_user(user)
         return Response(
             {
@@ -372,8 +391,6 @@ class GoogleSocialLogin(ModelViewSet):
             },
             status=status.HTTP_200_OK,
         )
-
-
 class ReaderProfileViewSet(ModelViewSet):
     """
     Readers can view and update their profile.

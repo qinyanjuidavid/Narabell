@@ -11,9 +11,12 @@ from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.settings import api_settings
+from phonenumber_field.serializerfields import PhoneNumberField
 
 
 class UserSerializer(serializers.ModelSerializer):
+    phone = PhoneNumberField()
+
     class Meta:
         model = User
         fields = (
@@ -41,6 +44,15 @@ class LoginSerializer(TokenObtainPairSerializer):
         if api_settings.UPDATE_LAST_LOGIN:
             update_last_login(None, self.user)
         return data
+
+
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField(required=True)
+
+    class Meta:
+        fields = [
+            "refresh",
+        ]
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -82,12 +94,10 @@ class RegisterSerializer(serializers.ModelSerializer):
                 "User with this phone number already exists."
             )
         except ObjectDoesNotExist:
-            if (
-                validated_data["password"]
-                and validated_data["password_confirmation"]
-                and validated_data["password"]
-                == validated_data["password_confirmation"]
-            ):
+            password1 = validated_data["password"]
+            password2 = validated_data["password_confirmation"]
+
+            if password1 and password2 and password1 == password2:
                 user = User.objects.create(
                     phone=validated_data["phone"],
                     email=validated_data["email"],
@@ -99,7 +109,13 @@ class RegisterSerializer(serializers.ModelSerializer):
                     validated_data["password"],
                 )
                 user.save()
-            return user
+
+                return user
+
+            else:
+                raise serializers.ValidationError(
+                    "Passwords do not match.",
+                )
 
 
 # Activation Token
@@ -131,6 +147,7 @@ class SetNewPasswordSerializer(serializers.Serializer):
             "password",
             "password_confirm",
             "phone",
+            "token",
         )
 
 
@@ -151,9 +168,20 @@ class ReaderProfileSerializer(serializers.ModelSerializer):
         read_only_field = ("id",)
 
     def update(self, instance, validated_data):
+        request = self.context.get("request")
+        userQs = User.objects.get(id=request.user.id)
+
         if validated_data.get("user"):
             user_data = validated_data.pop("user")
             user = instance.user
+            if (
+                User.objects.filter(phone=user_data.get("phone"))
+                .exclude(id=user.id)
+                .exists()
+            ):
+                raise serializers.ValidationError(
+                    "Phone number already exists.",
+                )
             user.phone = user_data.get("phone", user.phone)
             user.email = user_data.get("email", user.email)
             user.full_name = user_data.get("full_name", user.full_name)
@@ -163,6 +191,7 @@ class ReaderProfileSerializer(serializers.ModelSerializer):
         instance.profile_picture = validated_data.get(
             "profile_picture", instance.profile_picture
         )
+
         instance.save()
 
         return instance
