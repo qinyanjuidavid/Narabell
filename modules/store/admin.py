@@ -73,4 +73,16 @@ class RatingsAdmin(admin.ModelAdmin):
 
 @admin.register(Favourite)
 class FavouriteAdmin(admin.ModelAdmin):
-    pass
+    list_display=("get_reader_full_name","get_reader_email","created_at","updated_at")
+
+    def get_reader_full_name(self, obj):
+        return obj.reader.user.full_name
+
+    get_reader_full_name.short_description = "Full Name"
+    get_reader_full_name.admin_order_field = "reader__user__full_name"
+
+    def get_reader_email(self, obj):
+        return obj.reader.user.email
+
+    get_reader_email.short_description = "Email"
+    get_reader_email.admin_order_field = "reader__user__email"
