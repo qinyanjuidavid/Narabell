@@ -23,6 +23,9 @@ class Author(TrackingModel):
     date_of_birth = models.DateField(_("date of birth"), blank=True, null=True)
     date_of_death = models.DateField(_("date of death"), blank=True, null=True)
     country = CountryField(_("country"), blank=True, null=True)
+    verified = models.BooleanField(
+        _("verified"),default=False
+    )
 
     def __str__(self):
         return self.name or str(self.author_id)
@@ -33,11 +36,8 @@ class Author(TrackingModel):
 
 
 class Genre(TrackingModel):
-    genre = models.CharField(
-        _("genre"),
-        max_length=256,
-        unique=True,
-    )
+    genre = models.CharField(_("genre"), max_length=256, unique=True)
+    description = models.TextField(_("description"), default="***No description***")
 
     def __str__(self):
         return self.genre

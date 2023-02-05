@@ -7,12 +7,21 @@ from modules.store.models import Book, Favourite, Publisher, Ratings, Author, Ge
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        "author_id",
+        "name",
+        "verified",
+        "date_of_birth",
+        "country",
+        "created_at",
+        "updated_at",
+    )
+    list_filter = ("verified",)
 
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("genre", "created_at", "updated_at")
 
 
 @admin.register(Publisher)
