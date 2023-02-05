@@ -17,21 +17,33 @@ class AuthorAdmin(admin.ModelAdmin):
         "updated_at",
     )
     list_filter = ("verified",)
+    search_fields = ("author_id", "name")
 
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
     list_display = ("genre", "created_at", "updated_at")
+    search_fields = ("genre",)
 
 
 @admin.register(Publisher)
 class PublisherAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("name", "created_at", "updated_at")
+    search_fields = ("name",)
 
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        "title",
+        "ISBN",
+        "year_published",
+        "available",
+        "created_at",
+        "updated_at",
+    )
+    list_filter = ("available",)
+    search_fields = ("title", "ISBN")
 
 
 @admin.register(Ratings)

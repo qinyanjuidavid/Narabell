@@ -23,9 +23,7 @@ class Author(TrackingModel):
     date_of_birth = models.DateField(_("date of birth"), blank=True, null=True)
     date_of_death = models.DateField(_("date of death"), blank=True, null=True)
     country = CountryField(_("country"), blank=True, null=True)
-    verified = models.BooleanField(
-        _("verified"),default=False
-    )
+    verified = models.BooleanField(_("verified"), default=False)
 
     def __str__(self):
         return self.name or str(self.author_id)
@@ -35,9 +33,18 @@ class Author(TrackingModel):
         ordering = ["-created_at"]
 
 
+def book_genre_covers_directory_path(instance, filename):
+    return f"covers/{instance.genre}/{filename}"
+
+
 class Genre(TrackingModel):
     genre = models.CharField(_("genre"), max_length=256, unique=True)
     description = models.TextField(_("description"), default="***No description***")
+    genre_image = models.ImageField(
+        _("genre image"),
+        upload_to=book_genre_covers_directory_path,
+        default="genre.png",
+    )
 
     def __str__(self):
         return self.genre
@@ -48,11 +55,7 @@ class Genre(TrackingModel):
 
 
 class Publisher(TrackingModel):
-    name = models.CharField(
-        _("publisher's name"),
-        max_length=256,
-        unique=True,
-    )
+    name = models.CharField(_("publisher's name"), max_length=256, unique=True)
 
     def __str__(self):
         return self.name
@@ -125,7 +128,7 @@ class Ratings(TrackingModel):
     comment = models.TextField(_("comment"), blank=True, null=True)
 
     def __str__(self):
-        return str(self.book.title)
+        return self.book.title
 
     class Meta:
         verbose_name_plural = "Ratings"
