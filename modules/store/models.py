@@ -126,6 +126,7 @@ class Ratings(TrackingModel):
         ],
     )
     comment = models.TextField(_("comment"), blank=True, null=True)
+    flag = models.BooleanField(_("flag"), default=False)
 
     def __str__(self):
         return self.book.title

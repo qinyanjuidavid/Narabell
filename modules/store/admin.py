@@ -48,7 +48,27 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(Ratings)
 class RatingsAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        "get_book_name",
+        "get_reader_name",
+        "rating",
+        "flag",
+        "created_at",
+        "updated_at",
+    )
+    list_filter = ("flag",)
+
+    def get_book_name(self, obj):
+        return obj.book.title
+
+    get_book_name.short_description = "Book"
+    get_book_name.admin_order_field = "book__title"
+
+    def get_reader_name(self, obj):
+        return obj.reader.user.full_name
+
+    get_reader_name.short_description = "Reader"
+    get_reader_name.admin_order_field = "reader__user__full_name"
 
 
 @admin.register(Favourite)

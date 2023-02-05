@@ -15,6 +15,7 @@ class AuthorSerializer(serializers.ModelSerializer):
             "date_of_birth",
             "date_of_death",
             "country",
+            "verified",
             "created_at",
             "updated_at",
         )
@@ -26,6 +27,8 @@ class GenreSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "genre",
+            "description",
+            "genre_image",
             "created_at",
             "updated_at",
         )
@@ -70,6 +73,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 class RatingSerializer(serializers.ModelSerializer):
     reader = ReaderProfileSerializer(read_only=True)
+    rating = serializers.IntegerField(required=True)
     # book = BookSerializer(read_only=True)
 
     class Meta:
@@ -92,8 +96,8 @@ class RatingSerializer(serializers.ModelSerializer):
             book=validated_data["book"],
             reader=reader_query,
         )
-        ratings.rating = validated_data.get("rating", rating.rating)
-        ratings.comment = validated_data.get("comment", rating.comment)
+        ratings.rating = validated_data.get("rating", ratings.rating)
+        ratings.comment = validated_data.get("comment", ratings.comment)
         ratings.save()
         return ratings
 
