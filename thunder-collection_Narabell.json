@@ -1,1 +1,324 @@
-{"client":"Thunder Client","collectionName":"Narabell","dateExported":"2022-10-24T05:05:15.779Z","version":"1.1","folders":[],"requests":[{"_id":"ac058d58-9ef3-4cbc-a1fb-d7ec3d027fdc","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Login","url":"http://127.0.0.1:8000/api/v1/login/","method":"POST","sortNum":40000,"created":"2022-10-24T04:38:06.455Z","modified":"2022-10-24T04:55:34.489Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"phone\":\"0700215646\",\n  \"password\":\"kinyanjuid29\"\n}","form":[]},"tests":[]},{"_id":"7538adde-3580-4218-990a-a9db276cf800","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Reader Sign Up","url":"http://127.0.0.1:8000/api/v1/register/","method":"POST","sortNum":45000,"created":"2022-10-24T04:43:21.387Z","modified":"2022-10-24T04:46:03.134Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"phone\":\"0700215646\",\n  \"email\":\"kin@gmail.com\",\n  \"full_name\":\"Ree Dah\",\n  \"password\":\"kinyanjuid29\",\n  \"password_confirmation\":\"kinyanjuid29\"\n}","form":[]},"tests":[]},{"_id":"cbbdcd23-378f-408e-b7a1-9707649b8284","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Account Activation","url":"http://127.0.0.1:8000/api/v1/activate/","method":"POST","sortNum":47500,"created":"2022-10-24T04:46:33.771Z","modified":"2022-10-24T04:54:09.080Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"token\":\"\",\n  \"phone\":\"\"\n}","form":[]},"tests":[]},{"_id":"6bc1429c-0ec0-420c-95b1-d10019748a64","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Auth Refresh","url":"http://127.0.0.1:8000/api/v1/auth/refresh/","method":"POST","sortNum":48750,"created":"2022-10-24T04:53:25.628Z","modified":"2022-10-24T04:55:48.222Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"refresh\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NjY3MzczNCwiaWF0IjoxNjY2NTg3MzM0LCJqdGkiOiIxMmJkZTA5MDAzNTU0YWE1YTdiNzE4ODUyNWY3ZDljNiIsInVzZXJfaWQiOjN9.Pn-7qDhrrH3pBKrSnbTbpaodlZbXc0JUjrpF8uy3GnU\"\n}","form":[]},"tests":[]},{"_id":"0453013c-b779-4dd7-a132-01bdc100626d","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Password Reset Request Phone Number","url":"http://127.0.0.1:8000/api/v1/password-reset/","method":"POST","sortNum":49375,"created":"2022-10-24T04:56:47.556Z","modified":"2022-10-24T04:57:46.047Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"phone\":\"0700215646\"\n}","form":[]},"tests":[]},{"_id":"c27ff6bf-e164-4c97-95d1-4ce7567f9da8","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Password Reset Token Check","url":"http://127.0.0.1:8000/api/v1/password-reset-token-check/","method":"POST","sortNum":49687.5,"created":"2022-10-24T04:58:16.986Z","modified":"2022-10-24T04:59:15.886Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"token\":\"832915\",\n  \"phone\":\"0700215646\"\n}","form":[]},"tests":[]},{"_id":"ad3af79c-d8d6-4daf-96fe-b74aae055930","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Set New Password","url":"http://127.0.0.1:8000/api/v1/password-reset-complete/","method":"POST","sortNum":49843.8,"created":"2022-10-24T04:59:51.104Z","modified":"2022-10-24T05:01:40.678Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"token\":\"832915\",\n  \"phone\":\"0700215646\",\n  \"password\":\"kinyanjuid29\",\n  \"password_confirm\":\"kinyanjuid29\"\n}","form":[]},"tests":[]},{"_id":"38336606-7230-4d41-be63-e87256ba87d4","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Google Signin","url":"http://127.0.0.1:8000/api/v1/google/login/","method":"POST","sortNum":50000,"created":"2022-10-23T09:12:55.624Z","modified":"2022-10-24T04:43:56.058Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"token\":\"ya29.a0Aa4xrXN23OMJeBYfpFqFBYGNIs1NK9FdMBw4KbQ24pKOKTAea2lC86aXz9GLHd0XANH_gw_4qADuPfOgOTTxTXXbxX0JZUevAwgelrISD_tH2u2a0gfQbWKhvUVAS8rYmmtIsIYduEp-InymfZ6ON7pLJlu0aCgYKATASARISFQEjDvL97_9gyLDPRNo6L2086H1-vg0163\"\n}","form":[]},"tests":[]},{"_id":"3215724f-a3ef-4ae4-afd3-8529ddac9afd","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Authors","url":"http://127.0.0.1:8000/api/v1/authors","method":"GET","sortNum":60000,"created":"2022-10-23T17:45:58.667Z","modified":"2022-10-24T04:43:59.745Z","headers":[],"params":[],"tests":[]},{"_id":"9b4e7177-23b6-4f42-98ab-48c980475414","colId":"dfd5bc18-e45d-4da0-b42a-7d533f02f8ef","containerId":"","name":"Reader Profile","url":"http://127.0.0.1:8000/api/v1/reader-profile/1/","method":"PUT","sortNum":90000,"created":"2022-10-24T05:03:00.449Z","modified":"2022-10-24T05:04:48.545Z","headers":[],"params":[],"body":{"type":"json","raw":"{\n  \"id\": 1,\n  \"user\": {\n    \"id\": 3,\n    \"phone\": \"+254700215646\",\n    \"email\": \"kin@gmail.com\",\n    \"full_name\": \"Reey Dah\",\n    \"role\": \"Reader\",\n    \"timestamp\": \"2022-10-24T04:49:24.752903Z\",\n    \"updated_at\": \"2022-10-24T05:01:42.856793Z\"\n  },\n  \"bio\": \"I love reading books...\",\n  \"created_at\": \"2022-10-24T04:49:24.771022Z\",\n  \"updated_at\": \"2022-10-24T04:49:24.771022Z\"\n}","form":[]},"auth":{"type":"bearer","bearer":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTc5NzA4LCJpYXQiOjE2NjY1ODc3MDgsImp0aSI6IjY2NTQ3N2M0ZjVlYzQwNzA5ODk3MWY3MjI5MTAzOTFmIiwidXNlcl9pZCI6M30.-xvO-37KH_5gF2WR3qyjdiIO-aTXKbG96FnNbu5Ba-U"},"tests":[]}]}
+{
+  "client": "Thunder Client",
+  "collectionName": "Narabell",
+  "dateExported": "2023-02-05T12:34:29.095Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "_id": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Accounts",
+      "containerId": "",
+      "created": "2023-02-05T08:26:10.211Z",
+      "sortNum": 10000
+    },
+    {
+      "_id": "876b6070-620d-41ce-b9c0-4df76c81bf0d",
+      "name": "Book Store",
+      "containerId": "",
+      "created": "2023-02-05T08:27:34.575Z",
+      "sortNum": 30000
+    }
+  ],
+  "requests": [
+    {
+      "_id": "ac058d58-9ef3-4cbc-a1fb-d7ec3d027fdc",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Login",
+      "url": "http://127.0.0.1:8000/api/v1/login/",
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2022-10-24T04:38:06.455Z",
+      "modified": "2023-02-05T11:41:55.273Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"phone\":\"0700215647\",\n  \"password\":\"kinyanjuid29\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "7538adde-3580-4218-990a-a9db276cf800",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Reader Sign Up",
+      "url": "http://127.0.0.1:8000/api/v1/register/",
+      "method": "POST",
+      "sortNum": 20000,
+      "created": "2022-10-24T04:43:21.387Z",
+      "modified": "2023-02-05T08:26:16.397Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"phone\":\"0700215647\",\n  \"email\":\"riggyg@gmail.com\",\n  \"full_name\":\"Riggy G\",\n  \"password\":\"kinyanjuid29\",\n  \"password_confirmation\":\"kinyanjuid29\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "65b14464-30b5-4dc0-9088-b472d4def2ae",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Logout",
+      "url": "http://127.0.0.1:8000/api/v1/logout/",
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2023-02-05T08:24:27.609Z",
+      "modified": "2023-02-05T08:26:17.774Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"refresh\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY3NTY3MTg5OSwiaWF0IjoxNjc1NTg1NDk5LCJqdGkiOiJlZDgyYTliMzQ2MWU0ZWQ2YTlmMmYzZmEwZjEyNTFmMyIsInVzZXJfaWQiOjN9.Tv0zOJMnKfLFHD_qqCUcjpQxbFVQ4YmnfaoBAzNi2Xg\"\n}",
+        "form": []
+      },
+      "auth": {
+        "type": "bearer",
+        "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc4MTc3NDk5LCJpYXQiOjE2NzU1ODU0OTksImp0aSI6IjRjMjEwZGI2YzE1ODQyYWM5OGIzZTk5NGMyZTczNzFiIiwidXNlcl9pZCI6M30.0UTRe5wZ8WRFoscb8TYAXLuZzM0ktFwlNIipchaMQMk"
+      },
+      "tests": []
+    },
+    {
+      "_id": "cbbdcd23-378f-408e-b7a1-9707649b8284",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Account Activation",
+      "url": "http://127.0.0.1:8000/api/v1/activate/",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2022-10-24T04:46:33.771Z",
+      "modified": "2023-02-05T08:26:19.113Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"token\":\"590826\",\n  \"phone\":\"0700215647\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "6bc1429c-0ec0-420c-95b1-d10019748a64",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Auth Refresh",
+      "url": "http://127.0.0.1:8000/api/v1/auth/refresh/",
+      "method": "POST",
+      "sortNum": 50000,
+      "created": "2022-10-24T04:53:25.628Z",
+      "modified": "2023-02-05T08:26:20.892Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"refresh\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY3NTY2OTc1MywiaWF0IjoxNjc1NTgzMzUzLCJqdGkiOiJmNmE4MWJkOTIzYWE0MWFlYmYyMzM1YWVjOTBhNzBkMyIsInVzZXJfaWQiOjN9.c1koKl0Rel026faZqTAAAyLNA0P2RaTbJFERu6LxAWg\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "0453013c-b779-4dd7-a132-01bdc100626d",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Password Reset Request Phone Number",
+      "url": "http://127.0.0.1:8000/api/v1/password-reset/",
+      "method": "POST",
+      "sortNum": 60000,
+      "created": "2022-10-24T04:56:47.556Z",
+      "modified": "2023-02-05T08:26:22.369Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"phone\":\"0700215646\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "c27ff6bf-e164-4c97-95d1-4ce7567f9da8",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Password Reset Token Check",
+      "url": "http://127.0.0.1:8000/api/v1/password-reset-token-check/",
+      "method": "POST",
+      "sortNum": 70000,
+      "created": "2022-10-24T04:58:16.986Z",
+      "modified": "2023-02-05T08:26:23.852Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"token\":\"528357\",\n  \"phone\":\"0700215646\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "3215724f-a3ef-4ae4-afd3-8529ddac9afd",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "876b6070-620d-41ce-b9c0-4df76c81bf0d",
+      "name": "Authors",
+      "url": "http://127.0.0.1:8000/api/v1/authors/",
+      "method": "GET",
+      "sortNum": 75000,
+      "created": "2022-10-23T17:45:58.667Z",
+      "modified": "2023-02-05T10:36:27.511Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "ad3af79c-d8d6-4daf-96fe-b74aae055930",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Set New Password",
+      "url": "http://127.0.0.1:8000/api/v1/password-reset-complete/",
+      "method": "POST",
+      "sortNum": 80000,
+      "created": "2022-10-24T04:59:51.104Z",
+      "modified": "2023-02-05T08:26:25.369Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"token\":\"528357\",\n  \"phone\":\"0700215646\",\n  \"password\":\"kinyanjuid29\",\n  \"password_confirm\":\"kinyanjuid29\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "38336606-7230-4d41-be63-e87256ba87d4",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Google Signin",
+      "url": "http://127.0.0.1:8000/api/v1/google/login/",
+      "method": "POST",
+      "sortNum": 90000,
+      "created": "2022-10-23T09:12:55.624Z",
+      "modified": "2023-02-05T08:26:27.110Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"token\":\"ya29.a0Aa4xrXN23OMJeBYfpFqFBYGNIs1NK9FdMBw4KbQ24pKOKTAea2lC86aXz9GLHd0XANH_gw_4qADuPfOgOTTxTXXbxX0JZUevAwgelrISD_tH2u2a0gfQbWKhvUVAS8rYmmtIsIYduEp-InymfZ6ON7pLJlu0aCgYKATASARISFQEjDvL97_9gyLDPRNo6L2086H1-vg0163\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "9b4e7177-23b6-4f42-98ab-48c980475414",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "2ea011ac-1843-42ab-999c-d8204e60c65b",
+      "name": "Reader Profile",
+      "url": "http://127.0.0.1:8000/api/v1/reader-profile/1/",
+      "method": "PUT",
+      "sortNum": 100000,
+      "created": "2022-10-24T05:03:00.449Z",
+      "modified": "2023-02-05T08:26:29.207Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"id\": 1,\n  \"user\": {\n    \"id\": 3,\n    \"phone\": \"+254700215646\",\n    \"email\": \"kin@gmail.com\",\n    \"full_name\": \"Johnstone Kizito\",\n    \"role\": \"Reader\",\n    \"timestamp\": \"2022-10-24T04:49:24.752903Z\",\n    \"updated_at\": \"2022-10-24T05:01:42.856793Z\"\n  },\n  \"bio\": \"I love reading books...I am a reader\",\n  \"created_at\": \"2022-10-24T04:49:24.771022Z\",\n  \"updated_at\": \"2022-10-24T04:49:24.771022Z\"\n}",
+        "form": []
+      },
+      "auth": {
+        "type": "bearer",
+        "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc4MTc3MDYzLCJpYXQiOjE2NzU1ODUwNjMsImp0aSI6ImRiZDQzOTA0ZTFmZDRiNzg5MDI5ZmYxYWJmNWE0YTk1IiwidXNlcl9pZCI6M30.tJATnyJ0T7iR3SeZdIU3F6X4MJ5rwYnMqk9Q__rZcAY"
+      },
+      "tests": []
+    },
+    {
+      "_id": "69aa71e1-64b5-43ff-b05d-d38d7d6452b4",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "876b6070-620d-41ce-b9c0-4df76c81bf0d",
+      "name": "Genre",
+      "url": "http://127.0.0.1:8000/api/v1/genres/",
+      "method": "GET",
+      "sortNum": 112500,
+      "created": "2022-10-24T05:16:20.832Z",
+      "modified": "2023-02-05T10:36:30.326Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "3b4a1237-1665-433a-a818-c8dd7123e718",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "876b6070-620d-41ce-b9c0-4df76c81bf0d",
+      "name": "Publishers",
+      "url": "http://127.0.0.1:8000/api/v1/publishers/",
+      "method": "GET",
+      "sortNum": 131250,
+      "created": "2022-10-24T05:22:05.403Z",
+      "modified": "2023-02-05T10:47:04.352Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "8c5527b6-6394-467d-9e60-eeef5f2322b7",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "876b6070-620d-41ce-b9c0-4df76c81bf0d",
+      "name": "Book Review",
+      "url": "http://127.0.0.1:8000/api/v1/ratings/",
+      "method": "POST",
+      "sortNum": 150000,
+      "created": "2023-02-05T09:38:20.279Z",
+      "modified": "2023-02-05T10:36:17.528Z",
+      "headers": [],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"book\":1,\n  \"rating\":3.5,\n  \"comment\":\"Interesting book\"\n}",
+        "form": []
+      },
+      "auth": {
+        "type": "bearer",
+        "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc4MTgxOTY5LCJpYXQiOjE2NzU1ODk5NjksImp0aSI6ImVhMjBjODMxNzU2ZDQ5ODZiNDFkYTQxNWQwNzlkMWMxIiwidXNlcl9pZCI6M30.unFtXx59Qe3Lvx23K_ttqGeFYEzjViiM5OEJXoVe_lc"
+      },
+      "tests": []
+    },
+    {
+      "_id": "10c31225-fb43-48fe-9596-e2020b39a891",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "876b6070-620d-41ce-b9c0-4df76c81bf0d",
+      "name": "books",
+      "url": "http://127.0.0.1:8000/api/v1/books/",
+      "method": "GET",
+      "sortNum": 160000,
+      "created": "2022-10-24T05:24:07.559Z",
+      "modified": "2023-02-05T11:42:16.579Z",
+      "headers": [],
+      "params": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc4MTg5MzE1LCJpYXQiOjE2NzU1OTczMTUsImp0aSI6IjU2ZTg3YmM1M2JlYjRkNzhiYmQ2MzJhMGJiZTRlOTZhIiwidXNlcl9pZCI6Mn0.zlJuA3ehlHY762qOfb0bFe4tScsVg1bpgL3PiwX7igs"
+      },
+      "tests": []
+    },
+    {
+      "_id": "e7ea1da0-545a-4d84-9df3-e65023cc64a3",
+      "colId": "dfd5bc18-e45d-4da0-b42a-7d533f02f8ef",
+      "containerId": "876b6070-620d-41ce-b9c0-4df76c81bf0d",
+      "name": "Favourite",
+      "url": "http://127.0.0.1:8000/api/v1/bookmark/",
+      "method": "POST",
+      "sortNum": 160000,
+      "created": "2023-02-05T11:00:09.864Z",
+      "modified": "2023-02-05T11:56:56.580Z",
+      "headers": [],
+      "params": [],
+      "body": { "type": "json", "raw": "{\n\"books\":[1]\n}", "form": [] },
+      "auth": {
+        "type": "bearer",
+        "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc4MTg5MzE1LCJpYXQiOjE2NzU1OTczMTUsImp0aSI6IjU2ZTg3YmM1M2JlYjRkNzhiYmQ2MzJhMGJiZTRlOTZhIiwidXNlcl9pZCI6Mn0.zlJuA3ehlHY762qOfb0bFe4tScsVg1bpgL3PiwX7igs"
+      },
+      "tests": []
+    }
+  ]
+}
