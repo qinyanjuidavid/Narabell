@@ -56,6 +56,7 @@ class Genre(TrackingModel):
 
 class Publisher(TrackingModel):
     name = models.CharField(_("publisher's name"), max_length=256, unique=True)
+    description = models.TextField(_("description"), blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -117,7 +118,7 @@ class Book(TrackingModel):
 class Ratings(TrackingModel):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     reader = models.ForeignKey(Reader, on_delete=models.DO_NOTHING)
-    rating = models.IntegerField(
+    rating = models.FloatField(
         _("rating"),
         default=0,
         validators=[
@@ -137,14 +138,14 @@ class Ratings(TrackingModel):
 
 
 class Favourite(TrackingModel):
-    reader = models.ForeignKey(Reader, on_delete=models.CASCADE)
+    reader = models.OneToOneField(Reader, on_delete=models.CASCADE)
     books = models.ManyToManyField(
         Book,
         related_name="favourite_books",
     )
 
     def __str__(self):
-        return self.reader.full_name or str(self.reader.phone)
+        return self.reader.user.full_name or str(self.reader.user.phone)
 
     class Meta:
         verbose_name_plural = "Favourite Books"

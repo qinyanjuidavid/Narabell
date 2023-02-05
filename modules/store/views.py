@@ -20,7 +20,7 @@ from rest_framework.viewsets import ModelViewSet
 
 class AuthorViewSet(ModelViewSet):
     serializer_class = AuthorSerializer
-    queryset = Author.objects.all()
+    queryset = Author.objects.filter(verified=True)
     permission_classes = []
     http_method_names = ["get"]
 
@@ -128,7 +128,7 @@ class PublisherViewSet(ModelViewSet):
 
 class BookViewSet(ModelViewSet):
     serializer_class = BookSerializer
-    queryset = Book.objects.all()
+    queryset = Book.objects.filter(available=True)
     permission_classes = []
     http_method_names = ["get"]
 

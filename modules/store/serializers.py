@@ -2,6 +2,7 @@ from modules.accounts.models import Reader
 from modules.accounts.serializers import ReaderProfileSerializer
 from modules.store.models import Author, Book, Favourite, Genre, Publisher, Ratings
 from rest_framework import serializers
+from django.shortcuts import get_object_or_404
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -73,8 +74,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 class RatingSerializer(serializers.ModelSerializer):
     reader = ReaderProfileSerializer(read_only=True)
-    rating = serializers.IntegerField(required=True)
-    # book = BookSerializer(read_only=True)
+    rating = serializers.FloatField(required=True)
 
     class Meta:
         model = Ratings
@@ -84,6 +84,7 @@ class RatingSerializer(serializers.ModelSerializer):
             "reader",
             "rating",
             "comment",
+            "flag",
             "created_at",
             "updated_at",
         )
@@ -93,8 +94,7 @@ class RatingSerializer(serializers.ModelSerializer):
             user=self.context["request"].user,
         )
         ratings, _ = Ratings.objects.get_or_create(
-            book=validated_data["book"],
-            reader=reader_query,
+            book=validated_data["book"], reader=reader_query, flag=False
         )
         ratings.rating = validated_data.get("rating", ratings.rating)
         ratings.comment = validated_data.get("comment", ratings.comment)
@@ -110,8 +110,7 @@ class RatingSerializer(serializers.ModelSerializer):
 
 class FavouriteSerializer(serializers.ModelSerializer):
     reader = ReaderProfileSerializer(read_only=True)
-    books = BookSerializer(read_only=True, many=True)
-
+    # books= BookSerializer(many=True,)
     class Meta:
         model = Favourite
         fields = (
@@ -121,3 +120,24 @@ class FavouriteSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+    def create(self, validated_data):
+        reader_query = Reader.objects.get(
+            user=self.context["request"].user,
+        )
+        
+        favourite_query = Favourite.objects.get_or_create(
+            reader=reader_query,
+        )
+        book_query= validated_data.get("books")
+      
+        for book in book_query:
+            if book in favourite_query[0].books.all():
+                favourite_query[0].books.remove(book)
+            else:
+                favourite_query[0].books.add(book)
+
+        return favourite_query[0]
+
+        
+        
